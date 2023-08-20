@@ -7,10 +7,12 @@ import ru.zakirov.dockerTutorial.models.Person;
 import ru.zakirov.dockerTutorial.repositories.PersonRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 public class PersonService {
+
     private final PersonRepository personRepository;
 
     @Autowired
@@ -18,14 +20,22 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    @Transactional
-    public void addTwoPeople(){
-        personRepository.save(new Person(1,"Андрей", "andrey@mail.ru"));
-        personRepository.save(new Person(2,"Артём", "artem@mail.ru"));
+
+    public List<Person> findAll() {
+        return personRepository.findAll();
     }
 
-    public List<Person> findAll(){
-        addTwoPeople();
-        return personRepository.findAll();
+    public Optional<Person> findById(int id) {
+        return personRepository.findById(id);
+    }
+
+    @Transactional
+    public void save(Person person) {
+        personRepository.save(person);
+    }
+
+    @Transactional
+    public void deleteById(int id) {
+        personRepository.deleteById(id);
     }
 }
