@@ -33,4 +33,4 @@ spec:
           value: mongodb://mongo:27017/peopledb
         imagePullPolicy: Always
         ports:
-        - containerPort: 8081
+        - containerPort: 8082
